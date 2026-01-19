@@ -1,4 +1,5 @@
 const { commentModel } = require("../model/commentModel.js");
+const { postModel } = require("../model/postModel.js");
 
 const getAllCommentsByPostId = async (req, res) => {
   try {

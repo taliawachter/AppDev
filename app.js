@@ -4,6 +4,8 @@ const dotenv = require("dotenv").config()
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const commentRouter = require("./routes/commentRouter.js")
+const userRouter = require("./routes/userRouter.js");
+const postsRouter = require("./routes/postsRouter.js");
 
 const port = process.env.PORT || 8000
 
@@ -23,7 +25,9 @@ db.once("open",()=>{
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
 
-app.use("/comment",commentRouter)
+app.use("", commentRouter);
+app.use("", postsRouter);
+app.use("", userRouter);
 
 app.listen(port, ()=>{
     console.log(`The App is running at localhost:${port}`)

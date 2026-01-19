@@ -1,0 +1,137 @@
+@host = http://localhost
+@port = 7770
+@baseUrl = {{host}}:{{port}}
+
+# USERS FLOW #
+###
+# 1) Create a new user
+# Save the returned _id and use it as {{userId}} in the next requests.
+POST {{baseUrl}}/users/create
+Content-Type: application/json
+
+{
+  "name": "shani Test",
+  "email": "shan.test@gmail.com",
+  "password": "12345"
+}
+
+###
+# 2) Get all users
+# Used to verify the user was created successfully.
+GET {{baseUrl}}/users/All
+
+###
+# 3) Get a single user by id
+@userId = 
+GET {{baseUrl}}/users/{{userId}}
+
+###
+# 4) Update an existing user
+# Updates user details based on the given id.
+PUT {{baseUrl}}/users/update
+Content-Type: application/json
+
+{
+  "id": "{{userId}}",
+  "name": "shani Updated",
+  "email": "shan.updated@gmail.com",
+  "password": "12345"
+}
+
+###
+# 5) Delete a user
+# Removes the user from the database.
+DELETE {{baseUrl}}/users/delete
+Content-Type: application/json
+
+{
+  "id": "{{userId}}"
+}
+
+# POSTS FLOW #
+###
+# 1) Get all posts
+GET {{baseUrl}}/posts
+
+###
+# 2) Get a single post by id
+@postId = 696b95c5cd7e9100129c4e4f
+GET {{baseUrl}}/posts/{{postId}}
+
+###
+# 3) Get posts by uploader id
+# Returns all posts created by a specific user.
+@uploaderId = 67444aab0874d4c010cb844d
+GET {{baseUrl}}/posts/uploader?uploaderId={{uploaderId}}
+
+###
+# 4) Create a new post
+# uploader must be an existing user id.
+POST {{baseUrl}}/posts/create
+Content-Type: application/json
+
+{
+  "title": "Post Title Test",
+  "content": "Post content for API test",
+  "comments": [],
+  "uploader": "{{uploaderId}}"
+}
+
+###
+# 5) Update a post by id
+PUT {{baseUrl}}/posts/update/{{postId}}
+Content-Type: application/json
+
+{
+  "title": "Post Title Updated",
+  "content": "Updated post content"
+}
+
+###
+# 6) Delete a post
+# Also removes all related comments (according to controller logic).
+DELETE {{baseUrl}}/posts/delete
+Content-Type: application/json
+
+{
+  "id": "{{postId}}"
+}
+
+############################# COMMENTS FLOW ####################
+###
+# 1) Get all comments for a specific post
+@postIdForComments = 696b9a4c221fb92220188188
+GET {{baseUrl}}/comments/{{postIdForComments}}
+
+###
+# 2) Create a new comment
+# Requires a valid userId and postId.
+POST {{baseUrl}}/comments/create
+Content-Type: application/json
+
+{
+  "userId": "696b95a0cd7e9100129c4e4b",
+  "postId": "696b9a4c221fb92220188188",
+  "text": "Comment text for API test"
+}
+
+###
+# 3) Update a comment by id
+@commentId = 696b9b06a6488a86636c1684
+PUT {{baseUrl}}/comments/update
+Content-Type: application/json
+
+{
+  "id": "{{commentId}}",
+  "text": "Updated comment text"
+}
+
+###
+# 4) Delete a comment by id
+# Removes the comment from both the comments collection and the post.
+DELETE {{baseUrl}}/comments/delete
+Content-Type: application/json
+
+{
+  "id": "{{commentId}}"
+}
