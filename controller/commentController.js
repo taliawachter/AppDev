@@ -54,4 +54,34 @@ const getAllCommentsByPostId = async (req, res) => {
     }
   };
 
-module.exports = {getAllCommentsByPostId, createComment, updateComment};
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const removedComment = await commentModel.findByIdAndDelete(id);
+    if (!removedComment) {
+      res.status(400).json({
+        message: "Requested comment does not exist",
+      });
+      return;
+    }
+
+    const post = await postModel.findById(removedComment.postId);
+    post.comments = post.comments.filter(
+      (comment) => comment._id != id
+    );
+    await post.save();
+
+    res.status(200).json({
+      message: "Comment removed successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Failed to remove comment",
+      error: error.message,
+    });
+  }
+};
+
+
+module.exports = { getAllCommentsByPostId, createComment, updateComment, deleteComment };
