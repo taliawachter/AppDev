@@ -1,3 +1,7 @@
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
+
 const {postModel} = require("../model/postModel.js")
 const { commentModel } = require("../model/commentModel.js");
 

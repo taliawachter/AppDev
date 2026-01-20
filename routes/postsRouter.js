@@ -1,3 +1,7 @@
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
+
 const express = require("express");
 const router = express.Router();
 const postController = require("../controller/postsController.js")

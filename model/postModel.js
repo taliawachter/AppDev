@@ -1,3 +1,6 @@
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
 const mongoose = require("mongoose");
 const {commentSchema} = require("./commentModel")
 

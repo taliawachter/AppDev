@@ -1,9 +1,8 @@
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
+
 const {userModel} = require("../model/userModel.js");
-
-
-
-
-
 
 const getAllUsers = async (req, res) => {
   try {
