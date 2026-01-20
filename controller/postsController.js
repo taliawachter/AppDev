@@ -1,4 +1,9 @@
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
+
 const {postModel} = require("../model/postModel.js")
+const { commentModel } = require("../model/commentModel.js");
 
 const getAllposts = async (req , res)=>{
     try {
@@ -24,8 +29,8 @@ const getPost = async (req , res)=>{
 
 const getPostByuploadId = async (req , res)=>{
     try {
-      const {uploadUserId} = req.query
-        const posts = await postModel.find({uploadUser : uploadUserId});
+      const {uploaderId} = req.query
+        const posts = await postModel.find({uploadUser : uploaderId});
         if(!posts){
             return res.status(400).json({ message: "Post not found" });
         }
@@ -49,6 +54,7 @@ const updatePost = async (req, res) => {
   try {
     const postId = req.params.id;
     const { title, content } = req.body;
+
 
     const updatedPost = await postModel.findByIdAndUpdate(
       postId,

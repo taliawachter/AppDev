@@ -1,4 +1,8 @@
-const userModel = require("../model/userModel.js");
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
+
+const {userModel} = require("../model/userModel.js");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -40,7 +44,11 @@ const getUser = async (req, res) => {
   };
 
   const createUser = async (req, res) => {
+    console.log("HIT /users/create ✅", __filename);
+
     try {
+      console.log("CREATE CHECK:", typeof userModel, userModel?.modelName); // ← ופה
+
       const userToCreate = new userModel(req.body);
       const createdUser = await userToCreate.save();
 

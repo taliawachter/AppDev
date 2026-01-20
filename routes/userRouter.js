@@ -1,11 +1,14 @@
+//TALIA WACHTER - 324233048
+//SHANI ATTIAS - 323022129
+
 const express = require("express");
 const router = express.Router();
-const userController = require("../controller/UsersController.js")
+const userController = require("../controller/userController")
 
-router.get("/All",userController.getAllUsers)
-router.get("/:id", userController.getUser)
-router.post("/create", userController.createUser)
-router.put("/update", userController.updateUser)
-router.delete("/delete", userController.deleteUser)
+router.get("/All", userController.getAllUsers);
+router.get("/:id", userController.getUser);
+router.post("/create", userController.createUser);
+router.put("/update", userController.updateUser);
+router.delete("/delete", userController.deleteUser);
 
 module.exports = router;
